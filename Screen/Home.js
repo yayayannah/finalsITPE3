@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Styles from '../Styles/Styles';
 import Loader from '../Screen/LoadingScreen';
@@ -28,6 +28,9 @@ const Home = () => {
   };
 
   return (
+    <ImageBackground
+    source={require('../assets/1.png')}
+    style={Styles.backgroundImage} >
     <View style={Styles.container}>
       {isLoading ? <Loader/> : (
         <>
@@ -53,6 +56,7 @@ const Home = () => {
         </>
       )}
     </View>
+    </ImageBackground>
   );
 };
 

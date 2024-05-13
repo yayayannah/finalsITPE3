@@ -6,7 +6,6 @@ const Styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 20,
-        backgroundColor: '#00BB27'
     },
     input: {
         borderBottomWidth: 2,
@@ -65,6 +64,7 @@ const Styles = StyleSheet.create({
         color: '#4C489D',
         borderBottomColor: 'transparent',
         borderColor: 'transparent',
+        paddingTop: 10,
         shadowOffset: {
           width: 0,
           height: 2,
@@ -73,7 +73,11 @@ const Styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 2,
       },
-
+      backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+    },
 
 });
 

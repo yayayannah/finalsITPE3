@@ -1,44 +1,57 @@
 import { StyleSheet } from "react-native";
-const AnswerStyles = StyleSheet.create({
+
+  const styles = StyleSheet.create({
+    backgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+    },
     container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#f0f0f0',
-      padding: 20,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 20,
     },
-    heading: {
-      fontSize: 24,
-      fontWeight: 'bold',
-      marginBottom: 20,
+    headerText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
     },
-    card: {
-      backgroundColor: '#fff',
-      borderRadius: 10,
-      padding: 20,
-      marginBottom: 10,
-      width: '100%',
+    subHeaderText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginTop: 20,
+        marginBottom: 10,
     },
-    correctCard: {
-      backgroundColor: '#c8e6c9',
+    scoreText: {
+        fontSize: 18,
+        marginBottom: 10,
     },
-    wrongCard: {
-      backgroundColor: '#ffcdd2',
+    answersContainer: {
+        width: '100%',
+        marginBottom: 20,
+    },
+    answerItem: {
+        marginBottom: 10,
     },
     questionText: {
-      fontSize: 16,
-      marginBottom: 10,
-      fontWeight: 'bold',
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
     answerText: {
-      fontSize: 16,
-      marginBottom: 5,
+        marginLeft: 10,
     },
-    totalScore: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginTop: 20,
+    button: {
+        backgroundColor: '#007bff',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+        marginTop: 10,
     },
-  });
-
-  export default AnswerStyles;
+    buttonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+});
+  export default styles;
