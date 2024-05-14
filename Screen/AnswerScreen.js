@@ -6,7 +6,7 @@ const AnswerScreen = ({ route, navigation }) => {
     const { questionsData, userAnswers, totalScore } = route.params;
 
     const handleTryAgain = () => {
-        navigation.navigate('Practice Test'); // Go back to the practice test screen
+        navigation.navigate('PracticeTest'); // Go back to the practice test screen
     };
 
     const handleGoHome = () => {

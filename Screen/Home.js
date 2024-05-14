@@ -11,6 +11,8 @@ const Home = () => {
   //loading screen will pop up first
   const [isLoading, setIsLoading] = useState(true);
 
+  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -36,7 +38,7 @@ const Home = () => {
         <>
             <TouchableOpacity
              style={Styles.button}
-             onPress={() => navigation.navigate('Practice Test')}
+             onPress={() => navigation.navigate('PracticeTest')}
              >  
               <Text>
                 Practice Quiz
@@ -44,7 +46,7 @@ const Home = () => {
             </TouchableOpacity>
             <TouchableOpacity
              style={Styles.button}
-              onPress={() => navigation.navigate('Timed')}
+              onPress={() => navigation.navigate('TimerTest')}
              > <Text>
                 Timed Quiz
               </Text>

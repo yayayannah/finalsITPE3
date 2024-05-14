@@ -8,18 +8,22 @@ import Home from './Screen/Home';
 import SplashScreen from './Screen/SplashScreen';
 import PracticeTest from './Screen/PracticeTest';
 import AnswerScreen from './Screen/AnswerScreen';
+import TimerTest from './Screen/TimerQuiz';
+import TimerAnswer from './Screen/TimerQuizAnswers';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Practice Test">
+      <Stack.Navigator initialRouteName="TimerTest">
         <Stack.Screen name="Login" component={Login} options={{headerShown:false}}/>
         <Stack.Screen name="Home" component={Home} options={{ title: 'Home' , headerShown:false}} />
         <Stack.Screen name="Splash" component={SplashScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="Practice Test" component={PracticeTest} options={{headerShown:false}}/>
+        <Stack.Screen name="PracticeTest" component={PracticeTest} options={{headerShown:false}}/>
         <Stack.Screen name="AnswerScreen" component={AnswerScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="TimerTest" component={TimerTest} options={{headerShown:false}}/>
+        <Stack.Screen name="TimerAnswer" component={TimerAnswer} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
