@@ -67,7 +67,18 @@ const PractTestStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
+    },progressBarContainer: {
+        width: '100%',
+        height: 10,
+        backgroundColor: '#ddd',
+        marginTop: 10,
+        marginBottom: 10,
     },
+    progressBar: {
+        height: '100%',
+        backgroundColor: 'green', // Adjust color as needed
+    },
+    
 });
 
 export default PractTestStyles;

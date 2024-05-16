@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Alert } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import questionsData from '../Data/questionData';
 import styles from '../Styles/PracticeTestStyle';
@@ -15,22 +15,39 @@ const TimerTest = () => {
     const [userAnswers, setUserAnswers] = useState(Array(questionsData.length).fill(''));
     const [totalScore, setTotalScore] = useState(0);
     const [timer, setTimer] = useState(15); 
+    const progressBarWidth = useRef(new Animated.Value(0)).current;
+    const [showTimer, setShowTimer] = useState(false);
 
     useEffect(() => {
+        const animationDuration = 15000; // 15 seconds in milliseconds
         const interval = setInterval(() => {
             if (timer > 0) {
                 setTimer(prevTimer => prevTimer - 1);
+                const elapsedTime = 16 - timer; // Calculate time elapsed
+                const progress = elapsedTime / 15; // Calculate progress based on time elapsed
+                Animated.timing(progressBarWidth, {
+                    toValue: progress,
+                    duration: 1000,
+                    useNativeDriver: false
+                }).start();
             } else {
                 if (currentQuestionIndex === questionsData.length - 1) {
                     handlePracticeCompleted(); 
                 } else {
+                    checkAnswer();
                     handleNextQuestion();
                 }
+                // Ensure progress bar reaches end when timer ends
+                Animated.timing(progressBarWidth, {
+                    toValue: 1,
+                    duration: 0,
+                    useNativeDriver: false
+                }).start();
             }
         }, 1000);
-    
+
         return () => clearInterval(interval); 
-    }, [timer, currentQuestionIndex]); 
+    }, [timer, currentQuestionIndex]);
     
 
     useEffect(() => {
@@ -143,13 +160,17 @@ const TimerTest = () => {
                             disabled={!userAnswer}>
                             <Text style={styles.buttonText}>{currentQuestionIndex === questionsData.length - 1 ? 'Finish Test' : 'Next Question'}</Text>
                         </TouchableOpacity>
+                        <View style={styles.progressBarContainer}>
+                            <Animated.View style={[styles.progressBar, { width: progressBarWidth.interpolate({ inputRange: [0, 1], outputRange: ['0%', '100%'] }) }]} />
+                        </View>
                     </View>
                 ) : null}
-                <Text style={styles.timerText}>Time Left: {formatTime(timer)}</Text>
+                {showTimer && <Text style={styles.timerText}>{formatTime(timer)}</Text>}
             </View>
         </ImageBackground>
     );
 };
+
 
 const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
