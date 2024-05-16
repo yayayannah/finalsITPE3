@@ -12,6 +12,8 @@ const Login = () => {
   const handleLogin = () => {
     if (username === 'Admin' && password === 'Admin') {
       navigation.navigate('Home');
+      setUsername('');
+      setPassword('');
     } else {
       Alert.alert('Login Failed', 'Incorrect username or password');
     }

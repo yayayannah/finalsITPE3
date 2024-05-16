@@ -1,5 +1,5 @@
 import {React,useState,useEffect} from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import styles from '../Styles/AnswerStyle';
 import Loader from '../Screen/LoadingScreen';
 
@@ -49,7 +49,8 @@ const TimerAnswer = ({ route, navigation }) => {
             source={require('../assets/1.png')}
             style={styles.backgroundImage} >
                    {isLoading ? <Loader/> : (
-        <>
+        <>      
+        <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.headerText}>Practice Test Results</Text>
                 <Text style={styles.scoreText}>Your Score: {totalScore} / {questionsData.length}</Text>
@@ -73,6 +74,7 @@ const TimerAnswer = ({ route, navigation }) => {
                     <Text style={styles.buttonText}>Go Back to Home</Text>
                 </TouchableOpacity>
             </View>
+            </ScrollView>
             </>)}
                     </ImageBackground>
     );

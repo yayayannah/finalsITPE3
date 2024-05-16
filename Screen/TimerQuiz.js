@@ -58,13 +58,23 @@ const TimerTest = () => {
       fetchData();
     }, []);
   
+    const [randomizedQuestions, setRandomizedQuestions] = useState([]);
+
     const fetchData = () => {
-      setIsLoading(true);
-      setTimeout(()=> {
-        setIsLoading(false);
-  
-      }, 2000);
-    }
+        setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+            const shuffledQuestions = shuffleArray(questionsData).slice(0, 15);
+            setRandomizedQuestions(shuffledQuestions);
+        }, 2000);
+    };
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    };
   
     
 
