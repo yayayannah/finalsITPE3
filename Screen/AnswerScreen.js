@@ -1,6 +1,7 @@
-import React from 'react';
+import {React, useState,useEffect} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import styles from '../Styles/AnswerStyle';
+import Loader from '../Screen/LoadingScreen';
 
 const AnswerScreen = ({ route, navigation }) => {
     const { questionsData, userAnswers, totalScore } = route.params;
@@ -13,10 +14,29 @@ const AnswerScreen = ({ route, navigation }) => {
         navigation.navigate('Home'); // Navigate to the home screen
     };
 
+    const [isLoading, setIsLoading] = useState(true);
+
+  
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+  
+    const fetchData = () => {
+      setIsLoading(true);
+      setTimeout(()=> {
+        setIsLoading(false);
+  
+      }, 2000);
+    }
+  
+
     return (
         <ImageBackground
         source={require('../assets/1.png')}
         style={styles.backgroundImage} >
+             {isLoading ? <Loader/> : (
+        <>
         <View style={styles.container}>
             <Text style={styles.headerText}>Practice Test Results</Text>
             <Text style={styles.scoreText}>Your Score: {totalScore} / {questionsData.length}</Text>
@@ -37,6 +57,8 @@ const AnswerScreen = ({ route, navigation }) => {
                 <Text style={styles.buttonText}>Go Back to Home</Text>
             </TouchableOpacity>
         </View>
+        </>
+      )}
         </ImageBackground>
     );
 };

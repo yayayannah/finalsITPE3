@@ -3,6 +3,7 @@ import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet, ImageBackg
 import { useNavigation } from '@react-navigation/native';
 import questionsData from '../Data/questionData';
 import styles from '../Styles/PracticeTestStyle';
+import Loader from '../Screen/LoadingScreen';
 
 const TimerTest = () => {
     const navigation = useNavigation();
@@ -14,7 +15,7 @@ const TimerTest = () => {
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [userAnswers, setUserAnswers] = useState(Array(questionsData.length).fill(''));
     const [totalScore, setTotalScore] = useState(0);
-    const [timer, setTimer] = useState(15); 
+    const [timer, setTimer] = useState(16); 
     const progressBarWidth = useRef(new Animated.Value(0)).current;
     const [showTimer, setShowTimer] = useState(false);
 
@@ -48,6 +49,23 @@ const TimerTest = () => {
 
         return () => clearInterval(interval); 
     }, [timer, currentQuestionIndex]);
+
+    const [isLoading, setIsLoading] = useState(true);
+
+  
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+  
+    const fetchData = () => {
+      setIsLoading(true);
+      setTimeout(()=> {
+        setIsLoading(false);
+  
+      }, 2000);
+    }
+  
     
 
     useEffect(() => {
@@ -59,7 +77,7 @@ const TimerTest = () => {
     }, [navigation]);
 
     const resetState = () => {
-        setTimer(15);
+        setTimer(16);
         setCurrentQuestionIndex(0);
         setUserAnswer('');
         setIsCorrectAnswer(false);
@@ -70,7 +88,7 @@ const TimerTest = () => {
     };                                                 
 
     const resetScoreAndAnswers = () => {
-        setTimer(15); 
+        setTimer(16); 
         setTotalScore(0);
         setUserAnswer('');
         setIsCorrectAnswer(false);
@@ -108,7 +126,7 @@ const TimerTest = () => {
         setIsCorrectAnswer(false);
         setCorrectAnswer('');
         setIsWrongAnswer(false);
-        setTimer(15);
+        setTimer(16);
     };
 
     const handlePracticeCompleted = () => {
@@ -122,7 +140,7 @@ const TimerTest = () => {
         setIsCorrectAnswer(false);
         setCorrectAnswer('');
         setIsWrongAnswer(false);
-        setTimer(15);
+        setTimer(16);
         resetScoreAndAnswers();
         setCurrentQuestionIndex(0);
         navigation.navigate('TimerAnswer', {
@@ -137,6 +155,8 @@ const TimerTest = () => {
         <ImageBackground
             source={require('../assets/1.png')}
             style={styles.backgroundImage} >
+                      {isLoading ? <Loader/> : (
+        <>
             <View style={styles.container}>
                 {currentQuestionIndex < questionsData.length ? (
                     <View style={styles.card}>
@@ -167,6 +187,8 @@ const TimerTest = () => {
                 ) : null}
                 {showTimer && <Text style={styles.timerText}>{formatTime(timer)}</Text>}
             </View>
+            </>
+      )}
         </ImageBackground>
     );
 };

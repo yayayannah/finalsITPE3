@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import  { useState,useEffect,React } from 'react';
 import { View, Text, Button, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import questionsData from '../Data/questionData';
 import styles from '../Styles/PracticeTestStyle';
+import Loader from '../Screen/LoadingScreen';
 
 const PracticeTest = () => {
     const navigation = useNavigation();
+    const [isLoading, setIsLoading] = useState(true);
+
+  
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+  
+    const fetchData = () => {
+      setIsLoading(true);
+      setTimeout(()=> {
+        setIsLoading(false);
+  
+      }, 2000);
+    }
+  
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswer, setUserAnswer] = useState('');
@@ -74,6 +91,8 @@ const PracticeTest = () => {
         <ImageBackground
         source={require('../assets/1.png')}
         style={styles.backgroundImage} >
+                  {isLoading ? <Loader/> : (
+        <>
         <View style={styles.container}>
             {currentQuestionIndex < questionsData.length ? (
                 <View style={styles.card}>
@@ -116,6 +135,8 @@ const PracticeTest = () => {
             ) : null}
  
         </View>
+        </>
+      )}
         </ImageBackground>
     );
 };

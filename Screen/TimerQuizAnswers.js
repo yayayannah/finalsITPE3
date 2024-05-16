@@ -1,7 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
+import {React,useState,useEffect} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import styles from '../Styles/AnswerStyle';
+import Loader from '../Screen/LoadingScreen';
 
 const TimerAnswer = ({ route, navigation }) => {
     const { questionsData, userAnswers } = route.params;
@@ -17,6 +17,23 @@ const TimerAnswer = ({ route, navigation }) => {
         return score;
     }, 0);
 
+    const [isLoading, setIsLoading] = useState(true);
+
+  
+
+    useEffect(() => {
+      fetchData();
+    }, []);
+  
+    const fetchData = () => {
+      setIsLoading(true);
+      setTimeout(()=> {
+        setIsLoading(false);
+  
+      }, 2000);
+    }
+  
+
     const handleTryAgain = () => {
         navigation.navigate('TimerTest'); // Go back to the practice test screen
         setTimer(15);
@@ -31,6 +48,8 @@ const TimerAnswer = ({ route, navigation }) => {
         <ImageBackground
             source={require('../assets/1.png')}
             style={styles.backgroundImage} >
+                   {isLoading ? <Loader/> : (
+        <>
             <View style={styles.container}>
                 <Text style={styles.headerText}>Practice Test Results</Text>
                 <Text style={styles.scoreText}>Your Score: {totalScore} / {questionsData.length}</Text>
@@ -54,7 +73,8 @@ const TimerAnswer = ({ route, navigation }) => {
                     <Text style={styles.buttonText}>Go Back to Home</Text>
                 </TouchableOpacity>
             </View>
-        </ImageBackground>
+            </>)}
+                    </ImageBackground>
     );
 };
 
