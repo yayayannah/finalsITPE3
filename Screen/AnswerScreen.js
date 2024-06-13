@@ -29,7 +29,7 @@ const AnswerScreen = ({ route, navigation }) => {
 
     return (
         <ImageBackground
-            source={require('../assets/1.png')}
+
             style={styles.backgroundImage}
         >
             {isLoading ? (

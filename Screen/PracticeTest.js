@@ -99,7 +99,6 @@ const PracticeTest = () => {
 
     return (
         <ImageBackground
-        source={require('../assets/1.png')}
         style={styles.backgroundImage} >
                   {isLoading ? <Loader/> : (
         <>

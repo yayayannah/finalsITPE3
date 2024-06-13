@@ -1,24 +1,29 @@
 import React from 'react';
-import {View, ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator, Text} from 'react-native';
 import Styles from '../Styles/Styles';
 import 'react-native-gesture-handler';
-import {
-    BallIndicator,
-    BarIndicator,
-    DotIndicator,
-    MaterialIndicator,
-    PacmanIndicator,
-    PulseIndicator,
-    SkypeIndicator,
-    UIActivityIndicator,
-    WaveIndicator,
-  } from 'react-native-indicators';
+// import {
+//     BallIndicator,
+//     BarIndicator,
+//     DotIndicator,
+//     MaterialIndicator,
+//     PacmanIndicator,
+//     PulseIndicator,
+//     SkypeIndicator,
+//     UIActivityIndicator,
+//     WaveIndicator,
+//   } from 'react-native-indicators';
+  import LottieView from 'lottie-react-native';
+
 
 const Loader = ({navigation}) => {
     return (
         <View style={[Styles.container]} >
             
-            <DotIndicator color="#CFDEE7" count={5} size={15}/>
+            <View style={Styles.gifContainer} >
+                <LottieView style={{flex: 1}} source={require('../assets/animatedLoader.json')} autoPlay loop />
+                <Text style={Styles.loadText} > Loading... </Text>
+            </View>
 
         </View>
 
